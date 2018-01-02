@@ -11,8 +11,10 @@ import  VueResource  from 'vue-resource'
 // 引入vue-amap
 import VueAMap from 'vue-amap';
 Vue.use(VueAMap);
+//拖拽
+import VueDND from 'awe-dnd'
 
-
+Vue.use(VueDND)
 
 /*加载组建*/
 import home from './components/home'
