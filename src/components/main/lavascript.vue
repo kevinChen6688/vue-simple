@@ -9,9 +9,6 @@
 		</div>
 	</div>
 </template>
-<script>
-import animate from 'animate.css'
-</script>
 <style>
 	.main-left1{
     	width: 52%;

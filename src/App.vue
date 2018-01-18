@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <a @click="goBack()">返回上一个页面</a>
     <hello-world/> 
   </div>
 </template>
@@ -11,6 +12,12 @@ export default {
   name: 'app',
   components: {
     HelloWorld
+  },
+  methods:{
+    goBack:function(){
+      console.log(this.$route.params)
+      window.history.length>0? this.$router.go(-1): this.$router.push('./')
+    }
   }
 }
 </script>

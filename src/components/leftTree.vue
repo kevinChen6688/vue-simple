@@ -2,10 +2,10 @@
 <div>
 	<div class="leftTree animated fadeInUp">
 		<ul>
-			<router-link to="/home" tag="li">首页</router-link>
-			<router-link to="/html" tag="li">html</router-link>
-			<router-link to="/javascript" tag="li">javascript</router-link>
-			<router-link to="/css" tag="li">css</router-link>
+			<router-link :to="{ name: 'home' }" tag="li">首页</router-link>
+			<router-link :to="{ name: 'html' }" tag="li">html</router-link>
+			<router-link :to="{ name: 'javascript' }" tag="li">javascript</router-link>
+			<router-link :to="{ name: 'css', params: { userId: 123 } }" tag="li">css</router-link>
 		</ul>
 	</div>	
 	<div class="rightMain  animated fadeInDown">
@@ -14,16 +14,6 @@
 </div>
 	
 </template>
-<script>
-import animate from 'animate.css'
-export default {
-  data () {
-    return {
-    
-    }
-  }
-}
-</script>
 <style scoped> 
 .router-link-active { background:  #4AA87D }
 .leftTree{

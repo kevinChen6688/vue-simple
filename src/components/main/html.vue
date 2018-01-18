@@ -13,64 +13,46 @@
 			<div >
 				label:<input type="text"  class="animated fadeInLeft" v-model="inputLabel"><br><br>
 				address:<input type="text" class="animated fadeInLeft" v-model="inputVal"><br><br>
-				<button class="btn-li animated fadeInRight" @click="addItem()">添加</button>
-			</div>
-		</div>
-		<div class="main-center">
-			<ul class="animated fadeInDown leftText">
-				<li v-for="(item,index) in items">
-					<span>{{ index+1 }}.</span>
-					<label>{{item.label}}</label>
-					<sapn>{{item.value}}</sapn>
-					<button class="btn-delete" @click="deleteItem(index)">删除</button>
-				</li>
-			</ul>
-			<div>
-				label:<input type="text"  class="animated fadeInLeft" v-model="inputLabel"><br><br>
-				address:<input type="text" class="animated fadeInLeft" v-model="inputVal"><br><br>
-				<button class="btn-li animated fadeInRight" @click="addItem()">添加</button>
-			</div>
-		</div>
-		<div class="main-right">
-			<ul class="animated fadeInDown leftText">
-				<li v-for="(item,index) in items">
-					<span>{{ index+1 }}.</span>
-					<label>{{item.label}}</label>
-					<sapn>{{item.value}}</sapn>
-					<button class="btn-delete" @click="deleteItem(index)">删除</button>
-				</li>
-			</ul>
-			<div>
-				label:<input type="text"  class="animated fadeInLeft" v-model="inputLabel"><br><br>
-				address:<input type="text" class="animated fadeInLeft" v-model="inputVal"><br><br>
+				<p v-if="show" class="red">label或者address不能为空！</p>
 				<button class="btn-li animated fadeInRight" @click="addItem()">添加</button>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
-import animate from 'animate.css'
 export default {
 	data: function(){
 		return {
+			show:false,
 			inputLabel:'',
 			inputVal:'',
-			items:[
-				{'label':'html5教程','value':'http://www.w3school.com.cn/html5/index.asp'},
-				{'label':'html5简介','value':'http://www.w3school.com.cn/html5/html_5_intro.asp'},
-				{'label':'html5视屏','value':'http://www.w3school.com.cn/html5/html_5_video.asp'},
-				{'label':'html5音频','value':'http://www.w3school.com.cn/html5/html_5_audio.asp'}
-			]
+			items:[]
 		}
-	},
+	},//这里是一进来金请求数据渲染
+	created(){
+        this.request();
+   },
 	methods:{
-		addItem:function(){
-			this.items.push({
-				'label':this.inputLabel,
-				'value':this.inputVal
+		// 一进来就进行获取数据
+		request () {
+			this.$http.get('../../../static/json.json').then((resp) => {
+				this.items=resp.body.items;
 			});
-			this.inputLabel="";
-			this.inputVal="";
+		},
+		addItem:function(){
+			if(this.inputLabel ==''|| null ||undefined){
+				this.show=true;
+			}else if(this.inputVal ==''|| null ||undefined){
+				this.show=true;
+			}else{
+				this.items.push({
+					'label':this.inputLabel,
+					'value':this.inputVal
+				});
+				this.inputLabel="";
+				this.inputVal="";
+				this.show=false;
+			}
 		},
 		deleteItem:function(index){
 			    this.items.splice(index,1); 
@@ -80,10 +62,12 @@ export default {
 }
 </script>
 <style>
-	.main-left,.main-center,.main-right{
-	    WIDTH: 33.33%;
+	.main-left{
 	    FLOAT: LEFT;
 	    padding-bottom: 20px;
+	}
+	.red{
+		color: #f00;
 	}
 	.leftText{
 		text-align: left;

@@ -17,7 +17,7 @@ export default {
     }
   },
   components: {
-    LeftTree
+    LeftTree,animate
   }
 }
 </script>

@@ -29,10 +29,10 @@ Vue.use(VueResource)
 // 每个路由应该映射一个组件。 
 const routes = [
   { path: '/', name:'home', component: home }, 
-  { path: '/home',  component: home }, 
-  { path: '/html',  component: html }, 
-  { path: '/css', component: css }, 
-  { path: '/javascript', component: javascript }
+  { path: '/home',  name:'home', component: home }, 
+  { path: '/html',  name:'html', component: html }, 
+  { path: '/css', name:'css', component: css }, 
+  { path: '/javascript', name:'javascript', component: javascript }
   //前面to指定的地方 path  /1
 ]
 
